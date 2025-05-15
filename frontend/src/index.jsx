@@ -1,11 +1,43 @@
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import  './assets/styles.scss';
+import { createBrowserRouter, RouterProvider } from 'react-router';
+import { Provider } from 'react-redux';
 import App from './components/App.jsx'
-import { BrowserRouter } from "react-router";
+import NotFoundPage from './components//NotFoundPage.jsx';
+import Mainpage from './components/Mainpage.jsx';
+import store from './store/store.js';
+import { RequireAuth } from './RequireAuth.jsx';
+
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RequireAuth>main</RequireAuth>,
+  },
+  {
+    path: '/login',
+    element: <Mainpage />
+  },
+  {
+    path: '/signup',
+    element: <>signuppage</>
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  },
+]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('chat'));
 root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <React.StrictMode>
+    <Provider store={store}>
+      <div className="d-flex flex-column h-100">
+        <App />
+        <RouterProvider router={router} />
+      </div>
+    </Provider>
+  </React.StrictMode>
 );

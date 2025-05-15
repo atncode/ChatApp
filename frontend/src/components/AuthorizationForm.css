@@ -1,0 +1,11 @@
+.auth-error {
+  font-size: .875rem;
+  color: #fff;
+  background-color: var(--bs-danger);
+  border-radius: var(--bs-border-radius);
+  position: absolute;
+  top: 100%;
+  max-width: 100%;
+  padding: .25rem .5rem;
+  margin-top: .1rem;
+}

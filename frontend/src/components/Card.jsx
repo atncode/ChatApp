@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Outlet } from 'react-router';
 import AuthorizationForm from './AuthorizationForm.jsx';
 import avatar from '../assets/avatar.jpg';
 
@@ -14,8 +15,10 @@ const Card = () => {
       <div className="card-footer p-4">
         <div className="text-center">
           <span>Нет аккаунта? </span>
-          <a href="/signup">Регистрация</a>
+          <Link to="/signup">Регистрация</Link>
         </div>
+      </div>
+      <div>
       </div>
     </div>
   );
