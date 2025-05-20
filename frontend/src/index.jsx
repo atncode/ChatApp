@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import App from './components/App.jsx'
 import NotFoundPage from './components//NotFoundPage.jsx';
 import Mainpage from './components/Mainpage.jsx';
+import ChannelPage from './components/ChannelPage.jsx';
 import store from './store/store.js';
 import { RequireAuth } from './RequireAuth.jsx';
 
@@ -13,7 +14,7 @@ import { RequireAuth } from './RequireAuth.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RequireAuth>main</RequireAuth>,
+    element: <RequireAuth><ChannelPage /></RequireAuth>,
   },
   {
     path: '/login',

@@ -31,7 +31,7 @@ const AuthorizationForm = () => {
           try {
             const response = await axios.post('/api/v1/login', values);
             const token = response.data.token;
-            dispatch(authActions.addToken({ token }));
+            dispatch(authActions.setCredentials({ token, values }));
             navigate('/');
           } catch(err) {
             if (err instanceof AxiosError) {
@@ -50,7 +50,7 @@ const AuthorizationForm = () => {
                 name="username"
                 className={fieldClass}
                 placeholder="Ваш ник"
-                ref={inputRef}
+                innerRef={inputRef}
               />
               <label htmlFor="username">Ваш ник</label>
           </div>
@@ -73,3 +73,4 @@ const AuthorizationForm = () => {
 };
 
 export default AuthorizationForm;
+

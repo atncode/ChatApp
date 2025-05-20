@@ -9,7 +9,13 @@ const store = configureStore({
 });
 
 store.subscribe(() => {
-  saveState({ token: store.getState().auth.token }, JWT_PERSISTENT_STATE);
+  saveState({
+    token: store.getState().auth.token,
+    username: store.getState().auth.username,
+    password: store.getState().auth.password,
+    channels: store.getState().auth.channels,
+    messages: store.getState().auth.messages,
+  }, JWT_PERSISTENT_STATE);
 });
 
 export default store;
