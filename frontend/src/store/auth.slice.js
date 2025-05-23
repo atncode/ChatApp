@@ -26,7 +26,7 @@ const authSlice = createSlice({
     setMessages: (state, { payload : { messages }}) => {
       state.messages = [ ...messages ];
     },
-    addMessages: (state, {payload : message }) => {
+    addMessage: (state, {payload : message }) => {
       state.messages = [ ...state.messages, message ];
     },
   }

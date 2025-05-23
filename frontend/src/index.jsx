@@ -9,6 +9,7 @@ import Mainpage from './components/Mainpage.jsx';
 import ChannelPage from './components/ChannelPage.jsx';
 import store from './store/store.js';
 import { RequireAuth } from './RequireAuth.jsx';
+import SignupPage from './components/SignupPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/signup',
-    element: <>signuppage</>
+    element: <SignupPage />
   },
   {
     path: '*',

@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import axios, { AxiosError } from 'axios';
 import { authActions } from '../store/auth.slice';
-
+import socket from '../socket';
 
 const MessagesForm = ({ channelId }) => {
   const dispatch = useDispatch();
@@ -14,17 +14,21 @@ const MessagesForm = ({ channelId }) => {
     inputText.current?.focus();
   });
 
-// { id: '1', body: 'new message', channelId: '1', username: 'admin }
-
-// const newMessage = { body: 'new message', channelId: '1', username: 'admin };
-// axios.post('/api/v1/messages', newMessage, {
-//   headers: {
-//     Authorization: `Bearer ${token}`,
-//   },
-// }).then((response) => {
-//   console.log(response.data); // => { id: '1', body: 'new message', channelId: '1', username: 'admin }
-// });
-
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log(socket.id);
+    });
+    socket.on('newMessage', (payload, err) => {
+      if (err) {
+        console.log('errrrrrr', err);
+      }
+      dispatch(authActions.addMessage(payload));
+    });
+    return () => {
+      socket.off('connect');
+      socket.off('newMessage');
+    };
+  }, [dispatch]);
 
   return (
     <Formik
@@ -32,14 +36,11 @@ const MessagesForm = ({ channelId }) => {
     onSubmit={ async (values, { resetForm }) => {
       try {
         const newMessage = { body: values.body, channelId, username };
-        const response = await axios.post('/api/v1/messages', newMessage, {
+        await axios.post('/api/v1/messages', newMessage, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log('newMessage response', response);
-        const message = response.data;
-        dispatch(authActions.addMessages(message));
         resetForm();
       } catch(err) {
         if (err instanceof AxiosError) {
