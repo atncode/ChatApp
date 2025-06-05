@@ -34,12 +34,12 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('chat'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <div className="d-flex flex-column h-100">
         <App />
         <RouterProvider router={router} />
       </div>
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

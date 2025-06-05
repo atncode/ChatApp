@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router';
+import { Link } from 'react-router';
 import AuthorizationForm from './AuthorizationForm.jsx';
 import avatar from '../assets/avatar.jpg';
 

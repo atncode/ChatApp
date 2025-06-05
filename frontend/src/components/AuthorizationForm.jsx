@@ -1,20 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
-import axios, { AxiosError } from 'axios';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { authActions } from '../store/auth.slice';
 import './AuthorizationForm.css';
 import cn from 'classnames';
+import { useLoginMutation } from '../api';
 
 const AuthorizationForm = () => {
   const inputRef = useRef();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [authFailed, setAuthFailed] = useState(false);
+  const [login, { isError }] = useLoginMutation();
 
   const fieldClass = cn('form-control', {
-    'is-invalid': authFailed,
+    'is-invalid': isError,
   });
 
   useEffect(() => {
@@ -28,17 +25,10 @@ const AuthorizationForm = () => {
           password: '',
         }}
         onSubmit={async (values) => {
-          try {
-            const response = await axios.post('/api/v1/login', values);
-            const token = response.data.token;
-            dispatch(authActions.setCredentials({ token, values }));
-            navigate('/');
-          } catch(err) {
-            if (err instanceof AxiosError) {
-              setAuthFailed(true);
-            }
-            throw err;
-          }
+          const credentials = await login(values).unwrap();
+          localStorage.setItem('user', JSON.stringify(credentials));
+          // dispatch(authActions.setCredentials(credentials));
+          navigate('/');
         }}
       >
         {() => (
@@ -63,7 +53,7 @@ const AuthorizationForm = () => {
               placeholder="Пароль"
             />
             <label className="form-label" htmlFor="password">Пароль</label>
-            {authFailed && (<div className="auth-error" >Неверные имя пользователя или пароль</div>)}
+            {isError && (<div className="auth-error" >Неверные имя пользователя или пароль</div>)}
           </div>
           <button type="submit" className="w-100 mb-3 btn btn-outline-primary">Войти</button>
           </Form>

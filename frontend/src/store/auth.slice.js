@@ -1,33 +1,44 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loadState } from "./storage";
-
-export const JWT_PERSISTENT_STATE = 'userData';
 
 const initialState = {
-  token: loadState(JWT_PERSISTENT_STATE)?.token ?? null,
-  username: loadState(JWT_PERSISTENT_STATE)?.username ?? null,
-  password: loadState(JWT_PERSISTENT_STATE)?.password ?? null,
-  channels: loadState(JWT_PERSISTENT_STATE)?.channels ?? [],
-  messages: loadState(JWT_PERSISTENT_STATE)?.messages ?? [],
+  token: JSON.parse(localStorage.getItem('user')).token ?? null,
+  username: JSON.parse(localStorage.getItem('user')).username ?? null,
+  channels: [],
+  messages: [],
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, { payload: { token, values } }) => {
+    setCredentials: (state, { payload: { token, username } }) => {
       state.token = token;
-      state.username = values.username;
-      state.password = values.password;
+      state.username = username;
     },
-    setChannels: (state, { payload : { channels }}) => {
-      state.channels = channels;
+    getChannels: (state, { payload }) => {
+      state.channels = payload;
     },
-    setMessages: (state, { payload : { messages }}) => {
-      state.messages = [ ...messages ];
+    getMessages: (state, { payload }) => {
+      state.messages = payload;
     },
-    addMessage: (state, {payload : message }) => {
+    addMessage: (state, { payload : message }) => {
       state.messages = [ ...state.messages, message ];
+    },
+    addChannel: (state, { payload: channel }) => {
+      state.channels = [ ...state.channels, channel ];
+    },
+    removeChannel: (state, { payload: channel }) => {
+      state.channels = state.channels.filter(({ id }) => id !== channel.id);
+      state.messages = state.messages.filter(({ channelId }) => channelId !== channel.id);
+    },
+    renameChannel: (state, { payload }) => {
+      const changedState = state.channels.map((channel) => {
+        if (channel.id === payload.id) {
+          return {...channel, name: payload.name };
+        }
+        return channel;
+      });
+      state.channels = [...changedState];
     },
   }
 });

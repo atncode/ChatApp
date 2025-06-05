@@ -1,23 +1,21 @@
-import axios from 'axios';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { authActions } from '../store/auth.slice';
+import { useCreateNewUserMutation } from '../api';
 
 
 
 const SignupPage = () => {
-  const dispatch = useDispatch();
+  const [ creareNewUser ] = useCreateNewUserMutation();
+
 
   useEffect(() => {
-    const createNewUser = async () => {
-      const values = { username: 'newuser', password: '123456' };
-      const response = await axios.post('/api/v1/signup', values);
-      const newUser = response.data;
-      dispatch(authActions.setCredentials(newUser.token, values));
-    }
-
-    createNewUser();
+    const handleSignup = async () => {
+      const values = { username: 'testuser', password: '111111' };
+      await creareNewUser(values).unwrap();
+    };
+  
+    handleSignup();
   });
-};
+
+}
 
 export default SignupPage;

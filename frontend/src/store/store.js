@@ -1,21 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authSlice, { JWT_PERSISTENT_STATE } from './auth.slice';
-import { saveState } from './storage';
+import authSlice from './auth.slice';
+import uiSlice from './ui';
+import { api } from '../api';
+
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
-  }
+    ui: uiSlice,
+    [api.reducerPath]: api.reducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware)
 });
 
-store.subscribe(() => {
-  saveState({
-    token: store.getState().auth.token,
-    username: store.getState().auth.username,
-    password: store.getState().auth.password,
-    channels: store.getState().auth.channels,
-    messages: store.getState().auth.messages,
-  }, JWT_PERSISTENT_STATE);
-});
 
 export default store;
