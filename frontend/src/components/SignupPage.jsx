@@ -1,4 +1,4 @@
-import SignupForm from './signupForm';
+import SignupForm from './SignupForm';
 import signupavatar from '../assets/avatar1.jpg';
 import Navbar from './Navbar';
 
