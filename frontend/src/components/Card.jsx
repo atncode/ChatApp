@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import AuthorizationForm from './AuthorizationForm.jsx';
 import avatar from '../assets/avatar.jpg';
 
+
 const Card = () => {
   return (
     <div className="card shadow-sm">

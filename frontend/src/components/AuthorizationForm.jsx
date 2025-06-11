@@ -26,8 +26,8 @@ const AuthorizationForm = () => {
         }}
         onSubmit={async (values) => {
           const credentials = await login(values).unwrap();
+          console.log('credentials', credentials);
           localStorage.setItem('user', JSON.stringify(credentials));
-          // dispatch(authActions.setCredentials(credentials));
           navigate('/');
         }}
       >
@@ -43,7 +43,7 @@ const AuthorizationForm = () => {
                 innerRef={inputRef}
               />
               <label htmlFor="username">Ваш ник</label>
-          </div>
+            </div>
           <div className="form-floating mb-4">
             <Field
               id="password"

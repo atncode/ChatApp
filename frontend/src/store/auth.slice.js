@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  token: JSON.parse(localStorage.getItem('user')).token ?? null,
-  username: JSON.parse(localStorage.getItem('user')).username ?? null,
+  token: JSON.parse(localStorage.getItem('user'))?.token ?? null,
+  username: JSON.parse(localStorage.getItem('user'))?.username ?? null,
   channels: [],
   messages: [],
 };

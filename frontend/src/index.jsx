@@ -8,7 +8,7 @@ import NotFoundPage from './components//NotFoundPage.jsx';
 import Mainpage from './components/Mainpage.jsx';
 import ChannelPage from './components/ChannelPage.jsx';
 import store from './store/store.js';
-import { RequireAuth } from './RequireAuth.jsx';
+import { RequireAuth } from './components/RequireAuth.jsx';
 import SignupPage from './components/SignupPage.jsx';
 
 
