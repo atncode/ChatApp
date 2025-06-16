@@ -11,6 +11,7 @@ import MessagesForm from './MessagesForm';
 import { getCurrentChannelName, getMessagesCount } from '../channelPageHelpers';
 import ModalWindow from "./ModalWindow";
 import Navbar from './Navbar.jsx';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -23,6 +24,7 @@ const ChannelPage = () => {
   const { isOpened, type } = modal;
   const auth = useSelector((state) => state.auth);
   const { username, channels, messages } = auth;
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (initialChannels && isChannelsSuccess) {
@@ -44,7 +46,7 @@ const ChannelPage = () => {
         <div className="row h-100 bg-white flex-md-row">
           <div className="col-4 col-md-2 border-end px-0 bg-light flex-column h-100 d-flex">
             <div className="d-flex mt-1 justify-content-between mb-2 ps-4 pe-2 p-4">
-              <b>Каналы</b>
+              <b>{t('titles.chnls')}</b>
               <button type="button"
                 className="p-0 text-primary btn btn-group-vertical"
                 onClick={() => {
@@ -109,7 +111,7 @@ const ChannelPage = () => {
                 <p className="m-0">
                   <b>{getCurrentChannelName(currentChannelId, channels)}</b>
                 </p>
-                <span className="text-muted">{getMessagesCount(currentChannelId, messages)}</span>
+                <span className="text-muted">{t('messages.key', { count: getMessagesCount(currentChannelId, messages) })}</span>
               </div>
               <div id="messages-box" className="chat-messages overflow-auto px-5 ">
                 <Messages currentChannelId={currentChannelId}/>

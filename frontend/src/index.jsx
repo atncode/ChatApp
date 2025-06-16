@@ -10,7 +10,7 @@ import ChannelPage from './components/ChannelPage.jsx';
 import store from './store/store.js';
 import { RequireAuth } from './components/RequireAuth.jsx';
 import SignupPage from './components/SignupPage.jsx';
-
+import './i18next.js';
 
 const router = createBrowserRouter([
   {

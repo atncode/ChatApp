@@ -4,6 +4,8 @@ import React, { useRef } from 'react';
 import { uiActions } from '../store/ui';
 import ChannelForm from './ChannelForm';
 import { useRemoveChannelMutation } from '../api';
+import { useTranslation } from 'react-i18next';
+
 
 
 const ModalWindow = () => {
@@ -13,6 +15,7 @@ const ModalWindow = () => {
   const { modal, defaultChannelId } = ui;
   const { isOpened, type, extra: { channelId } } = modal;
   const inputRef = useRef(null);
+  const { t } = useTranslation();
 
 
   const typesModalMap = {
@@ -49,18 +52,18 @@ const ModalWindow = () => {
         <Modal.Title>{modalData.title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className="lead">Уверены?</p>
+        <p className="lead">{t('p.areyoushure')}</p>
         <div className="d-flex justify-content-end">
           <Button className="me-2" variant="secondary"
             onClick={() => dispatch(uiActions.setIsModalOpened(false))}
-          >Отменить</Button>
+          >{t('buttons.cancel')}</Button>
           <Button variant="danger"
             onClick={() => {
               removeChannel(channelId);
               dispatch(uiActions.setCurrentChannelId(defaultChannelId));
               dispatch(uiActions.setIsModalOpened(false));
             }}
-          >Удалить</Button>
+          >{t('buttons.delete')}</Button>
         </div>
       </Modal.Body>
     </Modal>

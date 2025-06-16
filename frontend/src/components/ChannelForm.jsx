@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import { useAddChannelMutation, useEditChannelMutation } from '../api';
 import { uiActions } from '../store/ui';
+import { useTranslation } from 'react-i18next';
+
 
 
 const ChannelForm = ({ inputRef }) => {
@@ -14,6 +16,8 @@ const ChannelForm = ({ inputRef }) => {
   const ui = useSelector((state) => state.ui);
   const { modal, channelNameForRename } = ui;
   const { type, extra } = modal;
+  const { t } = useTranslation();
+
 
   const uiMap = {
     'addChannel': { initialName: '', isLoading: isLoadingAddChannel },
@@ -35,10 +39,10 @@ const ChannelForm = ({ inputRef }) => {
 
   const schema = yup.object().shape({
     name: yup.string()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .required('Обязательное поле')
-      .notOneOf(Object.values(channels.map(({ name }) => (name))), 'Должно быть уникальным'),
+      .min(3, t('validation.errors.min3'))
+      .max(20, t('validation.errors.max'))
+      .required(t('validation.errors.required'))
+      .notOneOf(Object.values(channels.map(({ name }) => (name))), t('validation.errors.notOneOf')),
   });
 
   return (
@@ -73,10 +77,10 @@ const ChannelForm = ({ inputRef }) => {
             <div className="d-flex justify-content-end">
               <button className="me-2 btn btn-secondary" type="button"
                 onClick={() => dispatch(uiActions.setIsModalOpened(false))}
-              >Отменить</button>
+              >{t('buttons.cancel')}</button>
               <button className="btn btn-primary" type="submit"
                 disabled={uiMap[type].isLoading}
-              >Отправить</button>
+              >{t('buttons.send')}</button>
             </div>
         </div>
       </Form>
