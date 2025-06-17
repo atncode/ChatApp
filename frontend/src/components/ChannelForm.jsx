@@ -5,19 +5,18 @@ import cn from 'classnames';
 import { useAddChannelMutation, useEditChannelMutation } from '../api';
 import { uiActions } from '../store/ui';
 import { useTranslation } from 'react-i18next';
-
+import { toast } from 'react-toastify';
 
 
 const ChannelForm = ({ inputRef }) => {
   const dispatch = useDispatch();
-  const [ addChannel, { error: addChannelError, isLoading: isLoadingAddChannel, isError: isErrorAddChannel } ] = useAddChannelMutation();
-  const [ editChannel, { error: editChannelError, isLoading: isLoadingEditChannel, isError: isErrorEditChannel } ] = useEditChannelMutation();
+  const [ addChannel, { isLoading: isLoadingAddChannel } ] = useAddChannelMutation();
+  const [ editChannel, { isLoading: isLoadingEditChannel } ] = useEditChannelMutation();
   const channels = useSelector((state) => state.auth.channels);
   const ui = useSelector((state) => state.ui);
   const { modal, channelNameForRename } = ui;
   const { type, extra } = modal;
   const { t } = useTranslation();
-
 
   const uiMap = {
     'addChannel': { initialName: '', isLoading: isLoadingAddChannel },
@@ -27,15 +26,23 @@ const ChannelForm = ({ inputRef }) => {
   const actionsMap = {
     'addChannel': {
       fn: (data) => addChannel(data).unwrap(),
-      isError: isErrorAddChannel,
-      error: addChannelError,
     },
     'renameChannel': {
       fn: (data) => editChannel(data).unwrap(),
-      isError: isErrorEditChannel,
-      error: editChannelError,
     },
   };
+
+  const notifyType = {
+    'addChannel': {
+      success: () => toast.success(t('notifications.chnlcreated')),
+      failed: () => toast.error(t('notifications.errors.addChnl')),
+    },
+    'renameChannel': {
+      success: () => toast.success(t('notifications.chnlrenamed')),
+      failed: () => toast.error(t('notifications.errors.renameChnl')),
+    },
+  };
+
 
   const schema = yup.object().shape({
     name: yup.string()
@@ -54,9 +61,11 @@ const ChannelForm = ({ inputRef }) => {
       validateOnChange={false}
       onSubmit={ async (values, { resetForm }) => {
         const data = (type === 'addChannel') ? values : { id: extra.channelId, name: values };
-        actionsMap[type].fn(data);
-        if (actionsMap[type].isError) {
-          console.log(actionsMap[type].error);
+        try {
+          await actionsMap[type].fn(data);
+          notifyType[type].success();
+        } catch (err) {
+          notifyType[type].failed();
         }
         resetForm();
         dispatch(uiActions.setIsModalOpened(false));

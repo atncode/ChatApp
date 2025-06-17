@@ -2,13 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useAddMessageMutation } from '../api';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 
 const MessagesForm = ({ channelId, username }) => {
-  const [ addMessage, { isLoading, isError, error } ] = useAddMessageMutation();
+  const [ addMessage, { isLoading } ] = useAddMessageMutation();
   const inputText = useRef();
   const { t } = useTranslation();
-
+  const notify = () => toast.error(t('notifications.errors.sendMsgs'));
 
   useEffect(() => {
     inputText.current?.focus();
@@ -20,10 +21,12 @@ const MessagesForm = ({ channelId, username }) => {
     initialValues={{ body: '' }}
     onSubmit={ async (values, { resetForm }) => {
       const newMessage = { body: values.body, channelId, username };
-      await addMessage(newMessage).unwrap();
-      if (isError) {
-        console.log(error);
+      try {
+        await addMessage(newMessage).unwrap();
+      } catch (err) {
+        notify();
       }
+
       resetForm();
     }}
     >

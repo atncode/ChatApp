@@ -12,13 +12,13 @@ import { getCurrentChannelName, getMessagesCount } from '../channelPageHelpers';
 import ModalWindow from "./ModalWindow";
 import Navbar from './Navbar.jsx';
 import { useTranslation } from 'react-i18next';
-
+import { toast } from 'react-toastify';
 
 
 const ChannelPage = () => {
   const dispatch = useDispatch();
-  const { data: initialChannels, isSuccess: isChannelsSuccess } = useGetChannelsQuery();
-  const { data: initialMessages, isSuccess: isMessagesSuccess } = useGetMessagesQuery();
+  const { data: initialChannels, isSuccess: isChannelsSuccess, isError: isChannelsError } = useGetChannelsQuery();
+  const { data: initialMessages, isSuccess: isMessagesSuccess, isError: isMessagesError } = useGetMessagesQuery();
   const ui = useSelector((state) => state.ui);
   const { modal, currentChannelId } = ui;
   const { isOpened, type } = modal;
@@ -30,13 +30,21 @@ const ChannelPage = () => {
     if (initialChannels && isChannelsSuccess) {
       dispatch(authActions.getChannels(initialChannels));
     }
-  }, [initialChannels, isChannelsSuccess, dispatch]);
+    if (isChannelsError) {
+      const notify = () => toast.error(t('notifications.errors.loadChnls'));
+      notify();
+    }
+  }, [initialChannels, isChannelsSuccess, isChannelsError, dispatch, t]);
 
   useEffect(() => {
     if (initialMessages && isMessagesSuccess) {
       dispatch(authActions.getMessages(initialMessages));
     }
-  }, [initialMessages, isMessagesSuccess, dispatch]);
+    if (isMessagesError) {
+      const notify = () => toast.error(t('notifications.errors.loadMsgs'));
+      notify();
+    }
+  }, [initialMessages, isMessagesSuccess, isMessagesError, dispatch, t]);
 
 
   return (

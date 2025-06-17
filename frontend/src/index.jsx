@@ -11,6 +11,7 @@ import store from './store/store.js';
 import { RequireAuth } from './components/RequireAuth.jsx';
 import SignupPage from './components/SignupPage.jsx';
 import './i18next.js';
+import { ToastContainer } from 'react-toastify';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ root.render(
         <App />
         <RouterProvider router={router} />
       </div>
+      <ToastContainer />
     </Provider>
   // </React.StrictMode>
 );

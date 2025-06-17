@@ -44,7 +44,19 @@ const ru = {
       password: 'Пароль',
       confirmPassword: 'Подтвердите пароль',
     },
-    successAlert: 'Канал создан',
+    notifications: {
+      chnlcreated: 'Канал создан',
+      chnlrenamed: 'Канал переименован',
+      chnlremoved: 'Канал удалён',
+      errors: {
+        loadChnls: 'Ошибка! Каналы не загружены',
+        loadMsgs: 'Ошибка! Сообщения не загружены',
+        sendMsgs: 'Ошибка! Сообщение не отправлено',
+        addChnl: 'Ошибка! Канал не добавлен',
+        renameChnl: 'Ошибка! Канал не переименован',
+        removeChnl: 'Ошибка! Канал не удалён',
+      }
+    },
     validation: {
       errors: {
         auth: 'Неверные имя пользователя или пароль',

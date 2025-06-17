@@ -5,7 +5,7 @@ import { uiActions } from '../store/ui';
 import ChannelForm from './ChannelForm';
 import { useRemoveChannelMutation } from '../api';
 import { useTranslation } from 'react-i18next';
-
+import { toast } from 'react-toastify';
 
 
 const ModalWindow = () => {
@@ -16,7 +16,8 @@ const ModalWindow = () => {
   const { isOpened, type, extra: { channelId } } = modal;
   const inputRef = useRef(null);
   const { t } = useTranslation();
-
+  const notifyRemoved = () => toast.success(t('notifications.chnlremoved'));
+  const notifyErrRemoved = () => toast.error(t('notifications.errors.removeChnl'))
 
   const typesModalMap = {
     'addChannel': { title: 'Добавить канал'},
@@ -58,8 +59,14 @@ const ModalWindow = () => {
             onClick={() => dispatch(uiActions.setIsModalOpened(false))}
           >{t('buttons.cancel')}</Button>
           <Button variant="danger"
-            onClick={() => {
-              removeChannel(channelId);
+            onClick={ async () => {
+              try {
+                await removeChannel(channelId).unwrap();
+                notifyRemoved();
+              } catch (err) {
+                notifyErrRemoved();
+              }
+
               dispatch(uiActions.setCurrentChannelId(defaultChannelId));
               dispatch(uiActions.setIsModalOpened(false));
             }}
