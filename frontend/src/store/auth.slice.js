@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import leo from 'leo-profanity';
 
 leo.add(leo.getDictionary('ru'));
@@ -31,7 +31,6 @@ const authSlice = createSlice({
     addChannel: (state, { payload: channel }) => {
       const newChannel = { ...channel, name: leo.clean(channel.name) };
       state.channels = [ ...state.channels, newChannel ];
-      console.log(current(state));
     },
     removeChannel: (state, { payload: channel }) => {
       state.channels = state.channels.filter(({ id }) => id !== channel.id);

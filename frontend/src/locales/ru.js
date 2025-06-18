@@ -33,6 +33,7 @@ const ru = {
     spans: {
       noacc: 'Нет аккаунта? ',
       chnlmanagment: 'Управление каналом',
+      plus: '+',
     },
     p: {
       areyoushure: 'Уверены?',
@@ -49,12 +50,12 @@ const ru = {
       chnlrenamed: 'Канал переименован',
       chnlremoved: 'Канал удалён',
       errors: {
-        loadChnls: 'Ошибка! Каналы не загружены',
-        loadMsgs: 'Ошибка! Сообщения не загружены',
-        sendMsgs: 'Ошибка! Сообщение не отправлено',
-        addChnl: 'Ошибка! Канал не добавлен',
-        renameChnl: 'Ошибка! Канал не переименован',
-        removeChnl: 'Ошибка! Канал не удалён',
+        loadChnls: 'Ошибка соединения',
+        loadMsgs: 'Ошибка соединения',
+        sendMsgs: 'Ошибка соединения',
+        addChnl: 'Ошибка соединения',
+        renameChnl: 'Ошибка соединения',
+        removeChnl: 'Ошибка соединения',
       }
     },
     validation: {

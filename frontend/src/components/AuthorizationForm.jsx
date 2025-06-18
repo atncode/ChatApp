@@ -5,9 +5,12 @@ import './AuthorizationForm.css';
 import cn from 'classnames';
 import { useLoginMutation } from '../api';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../store/auth.slice';
 
 
 const AuthorizationForm = () => {
+  const dispatch = useDispatch();
   const inputRef = useRef();
   const navigate = useNavigate();
   const [login, { isError }] = useLoginMutation();
@@ -30,6 +33,7 @@ const AuthorizationForm = () => {
         onSubmit={async (values) => {
           const credentials = await login(values).unwrap();
           localStorage.setItem('user', JSON.stringify(credentials));
+          dispatch(authActions.setCredentials(values));
           navigate('/');
         }}
       >
