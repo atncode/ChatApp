@@ -1,6 +1,5 @@
 import socket from './socket';
 import { authActions } from './store/auth.slice';
-import { uiActions } from './store/ui';
 
 const setupSocketListeners = (dispatch) => {
   socket.on('connect', () => {
@@ -11,7 +10,6 @@ const setupSocketListeners = (dispatch) => {
   });
   socket.on('newChannel', (payload) => {
     dispatch(authActions.addChannel(payload));
-    dispatch(uiActions.setCurrentChannelId(payload.id));
   });
   socket.on('removeChannel', (payload) => {
     dispatch(authActions.removeChannel(payload));

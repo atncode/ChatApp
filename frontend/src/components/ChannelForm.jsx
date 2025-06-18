@@ -62,7 +62,10 @@ const ChannelForm = ({ inputRef }) => {
       onSubmit={ async (values, { resetForm }) => {
         const data = (type === 'addChannel') ? values : { id: extra.channelId, name: values };
         try {
-          await actionsMap[type].fn(data);
+          const result = await actionsMap[type].fn(data);
+          if (type === 'addChannel') {
+            dispatch(uiActions.setCurrentChannelId(result.id));
+          }
           notifyType[type].success();
         } catch (err) {
           notifyType[type].failed();
