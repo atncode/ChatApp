@@ -36,6 +36,7 @@ const MessagesForm = ({ channelId, username }) => {
             <Field
               id="body"
               name="body"
+              aria-label="Новое сообщение"
               className="border-0 p-0 ps-2 form-control"
               placeholder="Введите сообщение..."
               innerRef={inputText}
