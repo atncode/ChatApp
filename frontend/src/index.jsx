@@ -12,6 +12,15 @@ import { RequireAuth } from './components/RequireAuth.jsx';
 import SignupPage from './components/SignupPage.jsx';
 import './i18next.js';
 import { ToastContainer } from 'react-toastify';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
+
+const rollbarConfig = {
+  accessToken: '2d8f0f7ba039433dbd6c6487d4ee2a40',
+  environment: 'production',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+};
+
 
 const router = createBrowserRouter([
   {
@@ -36,12 +45,17 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('chat'));
 root.render(
   // <React.StrictMode>
-    <Provider store={store}>
-      <div className="d-flex flex-column h-100">
-        <App />
-        <RouterProvider router={router} />
-      </div>
+  <RollbarProvider config={rollbarConfig}>
+    <ErrorBoundary>
       <ToastContainer />
-    </Provider>
+      <Provider store={store}>
+        <div className="d-flex flex-column h-100">
+          <App />
+          <RouterProvider router={router} />
+        </div>
+      </Provider>
+    </ErrorBoundary>
+  </RollbarProvider>
+
   // </React.StrictMode>
 );

@@ -29,7 +29,6 @@ const AuthorizationForm = () => {
         }}
         onSubmit={async (values) => {
           const credentials = await login(values).unwrap();
-          console.log('credentials', credentials);
           localStorage.setItem('user', JSON.stringify(credentials));
           navigate('/');
         }}
