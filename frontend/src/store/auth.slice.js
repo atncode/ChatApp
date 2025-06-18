@@ -1,4 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
+import leo from 'leo-profanity';
+
+leo.add(leo.getDictionary('ru'));
 
 const initialState = {
   token: JSON.parse(localStorage.getItem('user'))?.token ?? null,
@@ -22,10 +25,13 @@ const authSlice = createSlice({
       state.messages = payload;
     },
     addMessage: (state, { payload : message }) => {
-      state.messages = [ ...state.messages, message ];
+      const newMessage = {...message, body: leo.clean(message.body)};
+      state.messages = [ ...state.messages, newMessage ];
     },
     addChannel: (state, { payload: channel }) => {
-      state.channels = [ ...state.channels, channel ];
+      const newChannel = { ...channel, name: leo.clean(channel.name) };
+      state.channels = [ ...state.channels, newChannel ];
+      console.log(current(state));
     },
     removeChannel: (state, { payload: channel }) => {
       state.channels = state.channels.filter(({ id }) => id !== channel.id);
@@ -34,7 +40,7 @@ const authSlice = createSlice({
     renameChannel: (state, { payload }) => {
       const changedState = state.channels.map((channel) => {
         if (channel.id === payload.id) {
-          return {...channel, name: payload.name };
+          return {...channel, name: leo.clean(payload.name) };
         }
         return channel;
       });
