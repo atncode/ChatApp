@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { authActions } from '../store/auth.slice'
 
-
 const AuthorizationForm = () => {
   const dispatch = useDispatch()
   const inputRef = useRef()
@@ -50,18 +49,18 @@ const AuthorizationForm = () => {
             />
             <label htmlFor="username">{t('labels.nickname')}</label>
           </div>
-        <div className="form-floating mb-4">
-          <Field
-            id="password"
-            type="password"
-            name="password"
-            className={fieldClass}
-            placeholder={t('labels.password')}
-          />
-          <label className="form-label" htmlFor="password">{t('labels.password')}</label>
-          {isError && (<div className="auth-error">{t('validation.errors.auth')}</div>)}
-        </div>
-        <button type="submit" className="w-100 mb-3 btn btn-outline-primary">{t('buttons.login')}</button>
+          <div className="form-floating mb-4">
+            <Field
+              id="password"
+              type="password"
+              name="password"
+              className={fieldClass}
+              placeholder={t('labels.password')}
+            />
+            <label className="form-label" htmlFor="password">{t('labels.password')}</label>
+            {isError && (<div className="auth-error">{t('validation.errors.auth')}</div>)}
+          </div>
+          <button type="submit" className="w-100 mb-3 btn btn-outline-primary">{t('buttons.login')}</button>
         </Form>
       )}
     </Formik>

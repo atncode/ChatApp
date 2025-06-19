@@ -64,15 +64,14 @@ const ChannelForm = ({ inputRef }) => {
           if (type === 'addChannel') {
             dispatch(uiActions.setCurrentChannelId(result.id))
           }
-          notifyType[type].success()
-        } catch (err) {
+          notifyType[type].success() } catch (err) {
           notifyType[type].failed()
           throw new Error(err)
         }
         resetForm()
         dispatch(uiActions.setIsModalOpened(false))
       }}
-      >
+    >
       {({ errors, touched }) => (
         <Form>
           <div>
@@ -84,24 +83,27 @@ const ChannelForm = ({ inputRef }) => {
                 'is-invalid': errors.name && touched.name,
               })}
             />
-          <label htmlFor="name" className="visually-hidden">Имя канала</label>
-            {errors.name && touched.name ? (<div className='invalid-feedback'>{errors.name}</div>) : null}
+            <label htmlFor="name" className="visually-hidden">Имя канала</label>
+            {errors.name && touched.name ? <div className='invalid-feedback'>{errors.name}</div> : null}
             <div className="d-flex justify-content-end">
-              <button className="me-2 btn btn-secondary"
+              <button
+                className="me-2 btn btn-secondary"
                 type="button"
                 onClick={() => dispatch(uiActions.setIsModalOpened(false))}
               >
                 {t('buttons.cancel')}
               </button>
-              <button className="btn btn-primary" type="submit"
+              <button
+                className="btn btn-primary"
+                type="submit"
                 disabled={uiMap[type].isLoading}
               >
                 {t('buttons.send')}
               </button>
             </div>
-        </div>
-      </Form>
-    )}
+          </div>
+        </Form>
+      )}
     </Formik>
   )
 }
