@@ -2,10 +2,10 @@ import { useGetChannelsQuery, useGetMessagesQuery } from '../api'
 import DefaultChannel from './DefaultChannel'
 import Channel from './Channel'
 import Messages from './Messages'
-import { useDispatch, useSelector } from "react-redux"
-import { uiActions } from "../store/ui"
+import { useDispatch, useSelector } from 'react-redux'
+import { uiActions } from '../store/ui'
 import cn from 'classnames'
-import { authActions } from "../store/auth.slice"
+import { authActions } from '../store/auth.slice'
 import { useEffect } from 'react'
 import MessagesForm from './MessagesForm'
 import { getCurrentChannelName, getMessagesCount } from '../channelPageHelpers'
@@ -73,7 +73,8 @@ const ChannelPage = () => {
               {channels.map(({ id, name, removable }) => (
                 <li key={id} className="nav-item w-100">
                   {removable ? (
-                    <Channel
+                    <
+                      Channel
                       key={id}
                       name={name}
                       onClick={() => dispatch(uiActions.setCurrentChannelId(id))}
@@ -95,18 +96,17 @@ const ChannelPage = () => {
                         dispatch(uiActions.setChannelNameForRename(name))
                       }}
                     />) : (
-                      <DefaultChannel
-                        key={id}
-                        name={name}
-                        onClick={() => dispatch(uiActions.setCurrentChannelId(id))}
-                        classes={cn('w-100 rounded-0 text-start btn', {
-                          'btn-secondary': currentChannelId === id,
-                        })}
-                      />
-                    )
-                  }
+                    <DefaultChannel
+                      key={id}
+                      name={name}
+                      onClick={() => dispatch(uiActions.setCurrentChannelId(id))}
+                      classes={cn('w-100 rounded-0 text-start btn', {
+                        'btn-secondary': currentChannelId === id,
+                      })}
+                    />
+                  )}
                 </li>
-                )
+              ),
               )}
             </ul>
             {isOpened && (type === 'renameChannel') && <ModalWindow />}
@@ -121,7 +121,7 @@ const ChannelPage = () => {
                 <span className="text-muted">{t('messages.key', { count: getMessagesCount(currentChannelId, messages) })}</span>
               </div>
               <div id="messages-box" className="chat-messages overflow-auto px-5 ">
-                <Messages currentChannelId={currentChannelId}/>
+                <Messages currentChannelId={currentChannelId} />
               </div>
               <div className="mt-auto px-5 py-3">
                 <MessagesForm channelId={currentChannelId} username={username} />

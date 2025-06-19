@@ -1,6 +1,5 @@
-import React from 'react';
-import Card from './Card.jsx';
-import Navbar from './Navbar.jsx';
+import Card from './Card.jsx'
+import Navbar from './Navbar.jsx'
 
 const Mainpage = () => {
   return (
@@ -12,9 +11,9 @@ const Mainpage = () => {
             <Card />
           </div>
         </div>
-      </div> 
+      </div>
     </>
   )
-};
+}
 
-export default Mainpage;
+export default Mainpage
