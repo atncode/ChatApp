@@ -56,7 +56,7 @@ const ru = {
         addChnl: 'Ошибка соединения',
         renameChnl: 'Ошибка соединения',
         removeChnl: 'Ошибка соединения',
-      }
+      },
     },
     validation: {
       errors: {
@@ -68,9 +68,9 @@ const ru = {
         required: 'Обязательное поле',
         oneOf: 'Пароли должны совпадать',
         notOneOf: 'Должно быть уникальным',
-      }
-    }
+      },
+    },
   }
 }
 
-export default { ru };
+export default { ru }

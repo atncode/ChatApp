@@ -20,7 +20,8 @@ const MessagesForm = ({ channelId, username }) => {
       onSubmit={async (values, { resetForm }) => {
         const newMessage = { body: values.body, channelId, username }
         try {
-          await addMessage(newMessage).unwrap() } catch (err) {
+          await addMessage(newMessage).unwrap() }
+        catch (err) {
           notify()
           throw new Error(err)
         }

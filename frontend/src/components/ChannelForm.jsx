@@ -64,7 +64,8 @@ const ChannelForm = ({ inputRef }) => {
           if (type === 'addChannel') {
             dispatch(uiActions.setCurrentChannelId(result.id))
           }
-          notifyType[type].success() } catch (err) {
+          notifyType[type].success() }
+        catch (err) {
           notifyType[type].failed()
           throw new Error(err)
         }

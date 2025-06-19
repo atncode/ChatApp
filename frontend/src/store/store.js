@@ -1,8 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
-import authSlice from './auth.slice';
-import uiSlice from './ui';
-import { api } from '../api';
-
+import { configureStore } from '@reduxjs/toolkit'
+import authSlice from './auth.slice'
+import uiSlice from './ui'
+import { api } from '../api'
 
 const store = configureStore({
   reducer: {
@@ -10,8 +9,7 @@ const store = configureStore({
     ui: uiSlice,
     [api.reducerPath]: api.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware)
-});
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(api.middleware),
+})
 
-
-export default store;
+export default store
