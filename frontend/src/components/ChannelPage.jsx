@@ -98,7 +98,7 @@ const ChannelPage = () => {
                             }}
                           />
                         )
-                        : (
+                      : (
                           <DefaultChannel
                             key={id}
                             name={name}
