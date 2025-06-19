@@ -1,31 +1,31 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: '/api/v1',
     prepareHeaders: (headers) => {
-      const user = localStorage.getItem('user');
+      const user = localStorage.getItem('user')
       if (user) {
-        const token = JSON.parse(localStorage.getItem('user')).token;
+        const token = JSON.parse(localStorage.getItem('user')).token
         if (token) {
-          headers.set('Authorization', `Bearer ${token}`);
+          headers.set('Authorization', `Bearer ${token}`)
         }
       }
-      return headers;
-    }
+      return headers
+    },
   }),
   tagTypes: ['Channel', 'Message'],
   endpoints: builder => ({
     createNewUser: builder.mutation({
-      query: (user) => ({
+      query: user => ({
         url: 'signup',
         method: 'POST',
         body: user,
       }),
     }),
     login: builder.mutation({
-      query: (credentials) => ({
+      query: credentials => ({
         url: 'login',
         method: 'POST',
         body: credentials,
@@ -33,31 +33,31 @@ export const api = createApi({
     }),
     getChannels: builder.query({
       query: () => 'channels',
-      providesTags: (result) =>
+      providesTags: result =>
         result
           ? [...result.map(({ id }) => ({ type: 'Channel', id })), { type: 'Channel', id: 'LIST' }]
           : [{ type: 'Channel', id: 'LIST' }],
     }),
     getMessages: builder.query({
       query: () => 'messages',
-      providesTags: (result) =>
+      providesTags: result =>
         result
           ? [
-            ...result.map(({ id }) => ({ type: 'Message', id })),
-            ...new Set(result.map(({ channelId }) => ({ type: 'Message', id: `CHANNEL_${channelId}`}))),
-            { type: 'Message', id: 'LIST' },
+              ...result.map(({ id }) => ({ type: 'Message', id })),
+              ...new Set(result.map(({ channelId }) => ({ type: 'Message', id: `CHANNEL_${channelId}` }))),
+              { type: 'Message', id: 'LIST' },
             ]
           : [{ type: 'Message', id: 'LIST' }],
     }),
     addMessage: builder.mutation({
-      query: (message) => ({
+      query: message => ({
         url: 'messages',
         method: 'POST',
         body: message,
       }),
     }),
     addChannel: builder.mutation({
-      query: (channel) => ({
+      query: channel => ({
         url: 'channels',
         method: 'POST',
         body: channel,
@@ -78,14 +78,14 @@ export const api = createApi({
       }),
     }),
     removeMessage: builder.mutation({
-      query: (id) => ({
+      query: id => ({
         url: `messages/${id}`,
         method: 'DELETE',
         body: 'messages',
       }),
     }),
     removeChannel: builder.mutation({
-      query: (id) => ({
+      query: id => ({
         url: `channels/${id}`,
         method: 'DELETE',
       }),
@@ -95,7 +95,7 @@ export const api = createApi({
         { type: 'Message', id: `CHANNEL_${id}` },
       ],
     }),
-  })
+  }),
 })
 
 export const {
@@ -109,4 +109,4 @@ export const {
   useEditMessageMutation,
   useRemoveChannelMutation,
   useRemoveMessageMutation,
-} = api;
+} = api
