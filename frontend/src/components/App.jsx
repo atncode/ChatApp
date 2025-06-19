@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
-import 'bootstrap/scss/bootstrap.scss';
-import { setupSocketListeners, removeSocketListeners } from '../sockets.js';
-import { useDispatch } from 'react-redux';
-
+import { useEffect } from 'react'
+import 'bootstrap/scss/bootstrap.scss'
+import { setupSocketListeners, removeSocketListeners } from '../sockets.js'
+import { useDispatch } from 'react-redux'
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    setupSocketListeners(dispatch);
-  
+    setupSocketListeners(dispatch)
+
     return () => {
-      removeSocketListeners();
+      removeSocketListeners()
     };
-  }, [dispatch]);
+  }, [dispatch])
 }
 
-export default App;
+export default App

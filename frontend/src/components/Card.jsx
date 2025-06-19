@@ -1,12 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router';
-import AuthorizationForm from './AuthorizationForm.jsx';
-import avatar from '../assets/avatar.jpg';
-import { useTranslation } from 'react-i18next';
-
+import { Link } from 'react-router'
+import AuthorizationForm from './AuthorizationForm.jsx'
+import avatar from '../assets/avatar.jpg'
+import { useTranslation } from 'react-i18next'
 
 const Card = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div className="card shadow-sm">
@@ -25,7 +23,7 @@ const Card = () => {
       <div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Card;
+export default Card
