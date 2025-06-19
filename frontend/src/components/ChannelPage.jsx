@@ -72,40 +72,38 @@ const ChannelPage = () => {
             <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
               {channels.map(({ id, name, removable }) => (
                 <li key={id} className="nav-item w-100">
-                  {removable
-                    ?
-                      (
-                        <Channel
-                          key={id}
-                          name={name}
-                          onClick={() => dispatch(uiActions.setCurrentChannelId(id))}
-                          btncn={cn('rounded-0 text-start text-truncate', {
-                            'btn-secondary': currentChannelId === id,
-                          })}
-                          tglcn={cn('flex-grow-0', {
-                            'btn-secondary': currentChannelId === id,
-                          })}
-                          onRemove={() => {
-                            dispatch(uiActions.setExtraModal(id))
-                            dispatch(uiActions.setIsModalOpened(true))
-                            dispatch(uiActions.setTypeModal('removeChannel'))
-                          }}
-                          onRename={() => {
-                            dispatch(uiActions.setExtraModal(id))
-                            dispatch(uiActions.setIsModalOpened(true))
-                            dispatch(uiActions.setTypeModal('renameChannel'))
-                            dispatch(uiActions.setChannelNameForRename(name))
-                          }}
-                        />) : (
-                        <DefaultChannel
-                          key={id}
-                          name={name}
-                          onClick={() => dispatch(uiActions.setCurrentChannelId(id))}
-                          classes={cn('w-100 rounded-0 text-start btn', {
-                            'btn-secondary': currentChannelId === id,
-                          })}
-                        />
-                      )}
+                  {removable ? (
+                    <Channel
+                      key={id}
+                      name={name}
+                      onClick={() => dispatch(uiActions.setCurrentChannelId(id))}
+                      btncn={cn('rounded-0 text-start text-truncate', {
+                        'btn-secondary': currentChannelId === id,
+                      })}
+                      tglcn={cn('flex-grow-0', {
+                        'btn-secondary': currentChannelId === id,
+                      })}
+                      onRemove={() => {
+                        dispatch(uiActions.setExtraModal(id))
+                        dispatch(uiActions.setIsModalOpened(true))
+                        dispatch(uiActions.setTypeModal('removeChannel'))
+                      }}
+                      onRename={() => {
+                        dispatch(uiActions.setExtraModal(id))
+                        dispatch(uiActions.setIsModalOpened(true))
+                        dispatch(uiActions.setTypeModal('renameChannel'))
+                        dispatch(uiActions.setChannelNameForRename(name))
+                      }}
+                    />) : (
+                    <DefaultChannel
+                      key={id}
+                      name={name}
+                      onClick={() => dispatch(uiActions.setCurrentChannelId(id))}
+                      classes={cn('w-100 rounded-0 text-start btn', {
+                        'btn-secondary': currentChannelId === id,
+                      })}
+                    />
+                    )}
                 </li>
               ),
               )}
