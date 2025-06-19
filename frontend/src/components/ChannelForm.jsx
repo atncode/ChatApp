@@ -85,7 +85,7 @@ const ChannelForm = ({ inputRef }) => {
               })}
             />
             <label htmlFor="name" className="visually-hidden">Имя канала</label>
-            {errors.name && touched.name ? (<div className="invalid-feedback">{errors.name}</div>) : null}
+            {errors.name && touched.name ? <div className="invalid-feedback">{errors.name}</div> : null}
             <div className="d-flex justify-content-end">
               <button
                 className="me-2 btn btn-secondary"
