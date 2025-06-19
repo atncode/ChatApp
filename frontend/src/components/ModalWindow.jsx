@@ -72,7 +72,7 @@ const ModalWindow = () => {
               }
               catch (err) {
                 notifyErrRemoved()
-                throw new Error(err);
+                throw new Error(err)
               }
 
               dispatch(uiActions.setCurrentChannelId(defaultChannelId))
