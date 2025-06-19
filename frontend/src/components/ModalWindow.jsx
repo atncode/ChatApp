@@ -69,8 +69,10 @@ const ModalWindow = () => {
               try {
                 await removeChannel(channelId).unwrap()
                 notifyRemoved()
-              } catch (err) {
+              }
+              catch (err) {
                 notifyErrRemoved()
+                throw new Error(err);
               }
 
               dispatch(uiActions.setCurrentChannelId(defaultChannelId))

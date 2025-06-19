@@ -11,10 +11,10 @@ const SignupPage = () => {
           <div className="col-12 col-md-8 col-xxl-6">
             <div className="card shadow-sm">
               <div className="card-body d-flex flex-column flex-md-row justify-content-around align-items-center p-5">
-              <div>
-                <img src={signupavatar} className="rounded-circle" alt="Регистрация" />
-              </div>
-              <SignupForm />
+                <div>
+                  <img src={signupavatar} className="rounded-circle" alt="Регистрация" />
+                </div>
+                <SignupForm />
               </div>
             </div>
           </div>

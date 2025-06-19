@@ -70,7 +70,7 @@ const ru = {
         notOneOf: 'Должно быть уникальным',
       },
     },
-  }
+  },
 }
 
 export default { ru }

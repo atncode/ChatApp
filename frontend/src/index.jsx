@@ -51,5 +51,5 @@ root.render(
         </div>
       </Provider>
     </ErrorBoundary>
-  </RollbarProvider>
+  </RollbarProvider>,
 )

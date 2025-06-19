@@ -72,9 +72,9 @@ const ChannelPage = () => {
             <ul id="channels-box" className="nav flex-column nav-pills nav-fill px-2 mb-3 overflow-auto h-100 d-block">
               {channels.map(({ id, name, removable }) => (
                 <li key={id} className="nav-item w-100">
-                  {removable ? (
-                    <
-                      Channel
+                  {removable ?
+                  (
+                    <Channel
                       key={id}
                       name={name}
                       onClick={() => dispatch(uiActions.setCurrentChannelId(id))}
