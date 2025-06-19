@@ -73,7 +73,8 @@ const ChannelPage = () => {
               {channels.map(({ id, name, removable }) => (
                 <li key={id} className="nav-item w-100">
                   {
-                    removable ? (
+                    removable
+                      ? (
                       <Channel
                         key={id}
                         name={name}
@@ -96,7 +97,8 @@ const ChannelPage = () => {
                           dispatch(uiActions.setChannelNameForRename(name))
                         }}
                       />
-                    ) : (
+                    )
+                    : (
                       <DefaultChannel
                         key={id}
                         name={name}
