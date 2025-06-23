@@ -6,6 +6,7 @@ import { useAddChannelMutation, useEditChannelMutation } from '../api/api'
 import { uiActions } from '../store/ui'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router'
 
 const ChannelForm = ({ inputRef }) => {
   const dispatch = useDispatch()
@@ -16,6 +17,7 @@ const ChannelForm = ({ inputRef }) => {
   const { modal, channelNameForRename } = ui
   const { type, extra } = modal
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const uiMap = {
     addChannel: { initialName: '', isLoading: isLoadingAddChannel },
@@ -68,6 +70,12 @@ const ChannelForm = ({ inputRef }) => {
         }
         catch (err) {
           notifyType[type].failed()
+          if (err.status === 401) {
+            navigate('/login')
+          }
+          if (err.status === 404) {
+            dispatch(uiActions.setIsModalOpened(false));
+          }
           throw new Error(err)
         }
         resetForm()

@@ -5,7 +5,7 @@
 
 ### Description
 
-Is a software application for communication. There are you can create channels and share your minds
+It is a software application for communication. There are you can create channels and share your minds
 
 ## Installation
 

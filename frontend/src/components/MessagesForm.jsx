@@ -3,12 +3,14 @@ import { Formik, Form, Field } from 'formik'
 import { useAddMessageMutation } from '../api/api'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router'
 
 const MessagesForm = ({ channelId, username }) => {
   const [addMessage, { isLoading }] = useAddMessageMutation()
   const inputText = useRef()
   const { t } = useTranslation()
   const notify = () => toast.error(t('notifications.errors.sendMsgs'))
+  const navigate = useNavigate()
 
   useEffect(() => {
     inputText.current?.focus()
@@ -24,6 +26,9 @@ const MessagesForm = ({ channelId, username }) => {
         }
         catch (err) {
           notify()
+          if (err.status === 401) {
+            navigate('/login')
+          }
           throw new Error(err)
         }
         resetForm()
