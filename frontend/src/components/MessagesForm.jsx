@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Formik, Form, Field } from 'formik'
-import { useAddMessageMutation } from '../api'
+import { useAddMessageMutation } from '../api/api'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 
@@ -39,6 +39,7 @@ const MessagesForm = ({ channelId, username }) => {
               className="border-0 p-0 ps-2 form-control"
               placeholder="Введите сообщение..."
               innerRef={inputText}
+              autoComplete="off"
             />
             <button type="submit" disabled={isLoading} className="btn btn-group-vertical">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="20" height="20" fill="currentColor" className="bi bi-arrow-right-square">

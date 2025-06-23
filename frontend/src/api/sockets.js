@@ -1,5 +1,5 @@
 import socket from './socket'
-import { authActions } from './store/auth.slice'
+import { authActions } from '../store/auth.slice'
 
 const setupSocketListeners = (dispatch) => {
   socket.on('connect', () => {

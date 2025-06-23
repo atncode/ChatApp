@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRef } from 'react'
 import { uiActions } from '../store/ui'
 import ChannelForm from './ChannelForm'
-import { useRemoveChannelMutation } from '../api'
+import { useRemoveChannelMutation } from '../api/api'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 

@@ -1,5 +1,5 @@
-import Card from './Card.jsx'
-import Navbar from './Navbar.jsx'
+import Card from '../components/Card.jsx'
+import Navbar from '../components/Navbar.jsx'
 
 const Mainpage = () => {
   return (

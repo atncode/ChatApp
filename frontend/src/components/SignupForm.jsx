@@ -1,6 +1,6 @@
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
-import { useCreateNewUserMutation } from '../api'
+import { useCreateNewUserMutation } from '../api/api'
 import { useEffect, useRef } from 'react'
 import cn from 'classnames'
 import { useNavigate } from 'react-router'
@@ -53,6 +53,7 @@ const SignupForm = () => {
               className={cn('form-control', { 'is-invalid': (errors.username && touched.username) || isError })}
               placeholder={t('labels.username')}
               innerRef={inputRef}
+              autoComplete="off"
             />
             {errors.username && touched.username ? (<div className="invalid-feedback">{errors.username}</div>) : null}
             <label className="form-label" htmlFor="username">{t('labels.username')}</label>
@@ -65,6 +66,7 @@ const SignupForm = () => {
               name="password"
               className={cn('form-control', { 'is-invalid': (errors.password && touched.password) || isError })}
               placeholder={t('labels.password')}
+              autoComplete="off"
             />
             {errors.password && touched.password ? (<div className="invalid-feedback">{errors.password}</div>) : null}
             {isError ? (<div className="invalid-tooltip"></div>) : null}
@@ -77,6 +79,7 @@ const SignupForm = () => {
               name="confirmPassword"
               className={cn('form-control', { 'is-invalid': (errors.confirmPassword && touched.confirmPassword) || isError })}
               placeholder={t('labels.confirmPassword')}
+              autoComplete="off"
             />
             {errors.confirmPassword && touched.confirmPassword ? (<div className="invalid-feedback">{errors.confirmPassword}</div>) : null}
             {isError && (<div className="auth-error">{t('validation.errors.isExist')}</div>)}

@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik'
 import { useNavigate } from 'react-router'
 import './AuthorizationForm.css'
 import cn from 'classnames'
-import { useLoginMutation } from '../api'
+import { useLoginMutation } from '../api/api'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { authActions } from '../store/auth.slice'
@@ -46,6 +46,7 @@ const AuthorizationForm = () => {
               className={fieldClass}
               placeholder={t('labels.nickname')}
               innerRef={inputRef}
+              autoComplete="off"
             />
             <label htmlFor="username">{t('labels.nickname')}</label>
           </div>
@@ -56,6 +57,7 @@ const AuthorizationForm = () => {
               name="password"
               className={fieldClass}
               placeholder={t('labels.password')}
+              autoComplete="off"
             />
             <label className="form-label" htmlFor="password">{t('labels.password')}</label>
             {isError && (<div className="auth-error">{t('validation.errors.auth')}</div>)}

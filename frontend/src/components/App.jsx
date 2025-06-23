@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import 'bootstrap/scss/bootstrap.scss'
-import { setupSocketListeners, removeSocketListeners } from '../sockets.js'
+import { setupSocketListeners, removeSocketListeners } from '../api/sockets.js'
 import { useDispatch } from 'react-redux'
 
 function App() {

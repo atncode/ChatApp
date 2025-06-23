@@ -1,6 +1,6 @@
-import SignupForm from './SignupForm'
+import SignupForm from '../components/SignupForm'
 import signupavatar from '../assets/avatar1.jpg'
-import Navbar from './Navbar'
+import Navbar from '../components/Navbar'
 
 const SignupPage = () => {
   return (

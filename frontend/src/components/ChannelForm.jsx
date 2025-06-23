@@ -2,7 +2,7 @@ import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 import { useSelector, useDispatch } from 'react-redux'
 import cn from 'classnames'
-import { useAddChannelMutation, useEditChannelMutation } from '../api'
+import { useAddChannelMutation, useEditChannelMutation } from '../api/api'
 import { uiActions } from '../store/ui'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
@@ -84,6 +84,7 @@ const ChannelForm = ({ inputRef }) => {
               className={cn('mb-2 form-control', {
                 'is-invalid': errors.name && touched.name,
               })}
+              autoComplete="off"
             />
             <label htmlFor="name" className="visually-hidden">Имя канала</label>
             {errors.name && touched.name ? <div className="invalid-feedback">{errors.name}</div> : null}
