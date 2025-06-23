@@ -74,7 +74,7 @@ const ChannelForm = ({ inputRef }) => {
             navigate('/login')
           }
           if (err.status === 404) {
-            dispatch(uiActions.setIsModalOpened(false));
+            dispatch(uiActions.setIsModalOpened(false))
           }
           throw new Error(err)
         }
