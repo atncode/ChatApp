@@ -2,14 +2,18 @@ install:
 	npm ci
 
 build:
-	rm -rf dist
+	rm -rf frontend/dist
 	npm run build
 
-start:
-	make -C frontend start
+start-backend:
+	npm start
+
+start-frontend:
+	cd frontend && npm run dev
 
 dev:
-	make -C frontend develop
+	npx start-server -s ./frontend/dist & cd frontend && npm run dev
 
 lint:
-	make -C frontend lint
+	cd frontend
+	npx eslint --config frontend/eslint.config.js --ignore-pattern "frontend/dist/**" .

@@ -1,17 +1,13 @@
 import ReactDOM from 'react-dom/client'
 import './assets/styles.scss'
-import { createBrowserRouter, RouterProvider } from 'react-router'
+import { RouterProvider } from 'react-router'
 import { Provider } from 'react-redux'
 import App from './components/App.jsx'
-import NotFoundPage from './pages/NotFoundPage.jsx'
-import Mainpage from './pages/Mainpage.jsx'
-import ChannelPage from './pages/ChannelPage.jsx'
 import store from './store/store.js'
-import { RequireAuth } from './components/RequireAuth.jsx'
-import SignupPage from './pages/SignupPage.jsx'
 import './i18next.js'
 import { ToastContainer } from 'react-toastify'
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'
+import router from './router.jsx'
 
 const rollbarConfig = {
   accessToken: '2d8f0f7ba039433dbd6c6487d4ee2a40',
@@ -19,25 +15,6 @@ const rollbarConfig = {
   captureUncaught: true,
   captureUnhandledRejections: true,
 }
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RequireAuth><ChannelPage /></RequireAuth>,
-  },
-  {
-    path: '/login',
-    element: <Mainpage />,
-  },
-  {
-    path: '/signup',
-    element: <SignupPage />,
-  },
-  {
-    path: '*',
-    element: <NotFoundPage />,
-  },
-])
 
 const root = ReactDOM.createRoot(document.getElementById('chat'))
 root.render(
