@@ -9,7 +9,7 @@ const ru = {
       key_many: '{{count}} сообщений',
     },
     navigation: {
-      main: 'Hexlet Chat',
+      main: 'Chat',
       logout: 'Выйти',
     },
     titles: {
